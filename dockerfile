@@ -1,4 +1,4 @@
-FROM node:latest AS builder
+FROM node:14 AS builder
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run build
 
-FROM httpd:latest
+FROM httpd:2.4
 
 COPY --from=builder /app/build/ /usr/local/apache2/htdocs/
 
