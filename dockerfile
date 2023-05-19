@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:latest AS builder
 
 WORKDIR /app
 
@@ -10,8 +10,8 @@ COPY . .
 
 RUN npm run build
 
-RUN npm install -g serve
+FROM httpd:latest
 
-CMD ["serve", "-s", "build"]
+COPY --from=builder /app/build/ /usr/local/apache2/htdocs/
 
-EXPOSE 3000
+EXPOSE 80

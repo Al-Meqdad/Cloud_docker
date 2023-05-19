@@ -21,6 +21,6 @@ services:
   client:
     build: .
     ports:
-      - "3000:3000"
+      - "80:80"
     depends_on:
       - server
